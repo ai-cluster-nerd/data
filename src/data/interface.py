@@ -37,3 +37,6 @@ class Interface:
 
         # The data segments
         self.__logger.info('The data segments:\n%s', self.__dataset.keys())
+        self.__logger.info('The training set: %s\n%s', type(self.__dataset['train']), self.__dataset['train'].shape)
+        self.__logger.info('The validation set: %s\n%s', type(self.__dataset['validation']), self.__dataset['validation'].shape)
+        self.__logger.info('The test set: %s\n%s', type(self.__dataset['test']), self.__dataset['test'].shape)
