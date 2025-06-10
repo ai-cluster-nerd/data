@@ -1,56 +1,39 @@
-"""Module interface.py"""
+"""Module source.py"""
 import logging
-import os
-import pandas as pd
 
-import src.data.codes
-import src.data.reference
-import src.data.menu
-import src.elements.specifications as se
-import src.elements.s3_parameters as s3p
-import src.data.specifications
+import datasets
+
+import config
 
 
-class Interface:
+class Source:
     """
-    Interface
+    A class for data preparation.
     """
 
-    def __init__(self, s3_parameters: s3p.S3Parameters):
+    def __init__(self):
+        """
+        Constructor
         """
 
-        :param s3_parameters: The overarching S3 (Simple Storage Service) parameters
-                              settings of this project, e.g., region code name, buckets, etc.
-        """
+        self.__configurations = config.Config()
 
-        self.__s3_parameters: s3p.S3Parameters = s3_parameters
+        # The Data
+        self.__dataset: datasets.DatasetDict = datasets.load_dataset("DFKI-SLT/few-nerd", "supervised")
+
 
         # Logging
         logging.basicConfig(level=logging.INFO,
-                            format='\n\n%(message)s\n%(asctime)s.%(msecs)03d\n',
+                            format='\n\n%(message)s\n%(asctime)s.%(msecs)03d',
                             datefmt='%Y-%m-%d %H:%M:%S')
         self.__logger = logging.getLogger(__name__)
 
-    def exc(self) -> list[se.Specifications]:
+
+    def exc(self):
         """
 
         :return:
         """
 
-        # Codes
-        _codes: list[str] = src.data.codes.Codes().exc()
-        codes = [os.path.split(code)[-1] for code in _codes]
-        self.__logger.info(codes)
-
-        # Reference: of institutions
-        reference: pd.DataFrame = src.data.reference.Reference(
-            s3_parameters=self.__s3_parameters).exc(codes=codes)
-
-        # Menu
-        src.data.menu.Menu().exc(reference=reference)
-
-        # Structure for computations: ref. src.elements.specifications.py
-        specifications_: list[se.Specifications] = src.data.specifications.Specifications().exc(
-            reference=reference)
-
-        return specifications_
+        # The data segments
+        self.__logger.info('The data segments:\n%s', self.__dataset.keys())
