@@ -1,4 +1,5 @@
 """Module setup.py"""
+import sys
 import config
 import src.functions.directories
 
@@ -37,11 +38,7 @@ class Setup:
 
         self.__directories.cleanup(path=self.__configurations.warehouse)
 
-        states = []
-        for path in [self.__configurations.points_, self.__configurations.menu_]:
-            states.append(self.__directories.create(path=path))
-
-        return all(states)
+        return self.__directories.create(path=self.__configurations.warehouse)
 
     def exc(self) -> bool:
         """
@@ -49,4 +46,7 @@ class Setup:
         :return:
         """
 
-        return self.__local() & self.__data()
+        if self.__local() & self.__data():
+            return True
+
+        sys.exit('Unable to set up the temporary storage environments.')
