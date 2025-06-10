@@ -39,9 +39,7 @@ if __name__ == '__main__':
                         datefmt='%Y-%m-%d %H:%M:%S')
 
     # Modules
-
     import src.data.interface
-
     import src.elements.service as sr
     import src.elements.s3_parameters as s3p
     import src.functions.cache
@@ -52,6 +50,6 @@ if __name__ == '__main__':
     s3_parameters: s3p
     service: sr.Service
     arguments: dict
-    connector, s3_parameters, service, arguments = src.preface.interface.Interface().exc()
+    connector, s3_parameters, service = src.preface.interface.Interface().exc()
 
     main()
