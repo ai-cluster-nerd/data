@@ -17,10 +17,8 @@ def main():
     logger: logging.Logger = logging.getLogger(__name__)
     logger.info('Starting: %s', datetime.datetime.now().isoformat(timespec='microseconds'))
 
-
-    # Transfer
-    src.transfer.interface.Interface(
-      connector=connector, service=service, s3_parameters=s3_parameters).exc()
+    # Data
+    src.data.interface.Interface().exc()
 
     # Delete Cache Points
     src.functions.cache.Cache().exc()
