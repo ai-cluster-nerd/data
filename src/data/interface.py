@@ -6,7 +6,7 @@ import datasets
 import config
 
 
-class Source:
+class Interface:
     """
     A class for data preparation.
     """
