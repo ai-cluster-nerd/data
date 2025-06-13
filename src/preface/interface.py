@@ -3,7 +3,6 @@ import typing
 
 import boto3
 
-import config
 import src.elements.s3_parameters as s3p
 import src.elements.service as sr
 import src.functions.cache
@@ -18,11 +17,7 @@ class Interface:
     """
 
     def __init__(self):
-        """
-        Constructor
-        """
-
-        self.__configurations = config.Config()
+        pass
 
     @staticmethod
     def exc() -> typing.Tuple[boto3.session.Session, s3p.S3Parameters, sr.Service]:
