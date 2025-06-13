@@ -9,7 +9,7 @@ import src.elements.s3_parameters as s3p
 import src.elements.service as sr
 import src.s3.ingress
 import src.transfer.dictionary
-import src.transfer.initial
+import src.data.initial
 import src.transfer.metadata
 
 
@@ -72,7 +72,7 @@ class Interface:
         logging.info(strings)
 
         # Prepare the S3 (Simple Storage Service) section
-        src.transfer.initial.Initial(
+        src.data.initial.Initial(
             service=self.__service, s3_parameters=self.__s3_parameters).exc()
 
         # Transfer
