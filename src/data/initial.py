@@ -1,4 +1,4 @@
-"""Module setup.py"""
+"""Module initial.py"""
 import sys
 
 import config
