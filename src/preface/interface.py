@@ -24,7 +24,8 @@ class Interface:
 
         self.__configurations = config.Config()
 
-    def exc(self) -> typing.Tuple[boto3.session.Session, s3p.S3Parameters, sr.Service]:
+    @staticmethod
+    def exc() -> typing.Tuple[boto3.session.Session, s3p.S3Parameters, sr.Service]:
         """
 
         :return:
